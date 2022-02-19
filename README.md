@@ -35,3 +35,5 @@ sudo docker logs -tf --tail="50" vaultwarden
   
 #### Vaultwarden: <i><a href="https://github.com/dani-garcia/vaultwarden/wiki">Features</a></i>
 - *Enable Websockets Support.*
+- *Change > SIGNUPS_ALLOWED=true, to false after first login
+- *Change? > INVITATIONS_ALLOWED=true # Send invitation using admin page
