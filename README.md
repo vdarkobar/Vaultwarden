@@ -27,7 +27,7 @@ chmod +x setup.sh && \
 ./setup.sh
 ```
   
-#### Command will add *ADMIN TOKEN* to *.env* file, log in at:
+#### Command will add *ADMIN TOKEN* to *.env* file, used to log in at:
 ```
 https://subdomain.example.com/admin
 ```
