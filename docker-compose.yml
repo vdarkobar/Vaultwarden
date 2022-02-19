@@ -1,0 +1,33 @@
+version: '3.9'
+
+networks:
+  vw:
+    name: vw
+    driver: bridge
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden # change for multiple instances
+    restart: always
+
+    networks:
+      - vw
+
+    ports:
+      - $VWPORTN:80
+      - 3012:3012
+
+    volumes:
+      - ./vw-data:/data
+      - /var/log/docker:/var/log/docker
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+    environment:
+      - ADMIN_TOKEN=$ADMIN_TOKEN
+      - WEBSOCKET_ENABLED=true
+      - SIGNUPS_ALLOWED=true # Change to false after first login
+      - INVITATIONS_ALLOWED=true # Send invitation using admin page
+      - LOG_FILE=/var/log/docker/bitwarden.log
+      - DOMAIN=https://vw.$DOMAINNAME
