@@ -22,7 +22,7 @@ chmod +x setup.sh && \
 ./setup.sh
 ```
   
-#### Command will add *ADMIN_TOKEN* to *.env* file, log in at:
+#### Command will add *ADMIN TOKEN* to *.env* file, log in at:
 ```
 https://subdomain.example.com/admin
 ```
@@ -35,5 +35,4 @@ sudo docker logs -tf --tail="50" vaultwarden
   
 #### Vaultwarden: <i><a href="https://github.com/dani-garcia/vaultwarden/wiki">Features</a></i>
 - *Enable Websockets Support.*
-- *Change > SIGNUPS_ALLOWED=true, to false after first login
-- *Change? > INVITATIONS_ALLOWED=true # Send invitation using admin page
+- *Change: SIGNUPS_ALLOWED=true, to false after first login and rebuild containers.
