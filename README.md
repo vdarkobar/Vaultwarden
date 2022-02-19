@@ -1,14 +1,5 @@
 # Vaultwarden
-  
-<p align="left">
-  <a href="https://github.com/vdarkobar/Home_Cloud#small-home-cloud">Home</a> |
-  <a href="https://github.com/vdarkobar/NextCloud#nextcloud">NextCloud</a> |
-  <a href="https://github.com/vdarkobar/WordPress#wordpress">WordPress</a> |
-  <a href="https://github.com/vdarkobar/Ghost-blog#ghost-blog">Ghost-blog</a> |
-  <a href="https://github.com/vdarkobar/Portainer">Portainer</a>  
-  <br><br>
-</p>  
-  
+    
 Login to <a href="https://dash.cloudflare.com/">CloudFlare</a>  and add: *Subdomain* for Vaultwarden, pointing to your root *Domain*.
 ```
     A | example.com | YOUR WAN IP
