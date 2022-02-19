@@ -1,6 +1,6 @@
 # Vaultwarden
     
-Login to <a href="https://dash.cloudflare.com/">CloudFlare</a>  and add: *Subdomain* for Vaultwarden, pointing to your root *Domain*.
+Login to <a href="https://dash.cloudflare.com/">CloudFlare</a>  and add: *Subdomain* for *Vaultwarden*, pointing to your root *Domain*.
 ```
     A | example.com | YOUR WAN IP
 ```
