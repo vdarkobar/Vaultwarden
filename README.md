@@ -35,4 +35,4 @@ sudo docker logs -tf --tail="50" vaultwarden
   
 #### Vaultwarden: <i><a href="https://github.com/dani-garcia/vaultwarden/wiki">Features</a></i>
 - *Enable Websockets Support.*
-- *Change: SIGNUPS_ALLOWED=true, to false after first login and rebuild containers.
+- *Change: SIGNUPS_ALLOWED=true, to false after first login and rebuild containers.*
