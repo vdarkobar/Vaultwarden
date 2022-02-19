@@ -34,3 +34,4 @@ sudo docker logs -tf --tail="50" vaultwarden
 ```
   
 #### Vaultwarden: <i><a href="https://github.com/dani-garcia/vaultwarden/wiki">Features</a></i>
+Enable Websockets Support.
