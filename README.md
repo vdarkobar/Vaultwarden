@@ -12,7 +12,7 @@ Login to <a href="https://dash.cloudflare.com/">CloudFlare</a>  and add: *Subdom
 ### *Run this command*:
 ```
 RED='\033[0;31m'; echo -ne "${RED}Enter directory name: "; read NAME; mkdir -p "$NAME"; \
-cd "$NAME" && git clone https://github.com/vdarkobar/Bitwarden.git . && \
+cd "$NAME" && git clone https://github.com/vdarkobar/Vaultwarden.git . && \
 chmod +x setup.sh && \
 ./setup.sh
 ```
