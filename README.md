@@ -17,7 +17,8 @@ example:
   
 #### *Decide what you will use for*:
 ```
-Vaultwarden Port Number.
+Domain name of your website, 
+Vaultwarden Subdomain and Port Number.
 ```
   
 ### *Run this command*:
