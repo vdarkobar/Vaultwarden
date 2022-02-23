@@ -6,6 +6,8 @@ networks:
     driver: bridge
 
 services:
+ 
+  # Vaultwarden - Open Source Password Manager.
   vaultwarden:
     image: vaultwarden/server:latest
     container_name: vaultwarden # change for multiple instances
@@ -31,3 +33,23 @@ services:
       - INVITATIONS_ALLOWED=true # Send invitation using admin page
       - LOG_FILE=/var/log/docker/bitwarden.log
       - DOMAIN=https://vw.$DOMAINNAME
+
+  # Watchtower - automating Docker container base image updates.
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+
+    networks:
+      - auth
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    environment:
+      - TZ=$TZ
+      - WATCHTOWER_DEBUG=true
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_REMOVE_VOLUMES=true
+      - WATCHTOWER_INCLUDE_STOPPED=true
+      - WATCHTOWER_SCHEDULE=0 30 5 * * * # Everyday at 5:30
