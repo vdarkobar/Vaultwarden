@@ -7,10 +7,11 @@
     
 Login to <a href="https://dash.cloudflare.com/">CloudFlare</a>  and add: *Subdomain* for *Vaultwarden*, pointing to your root *Domain*.
 ```
-    A | example.com | YOUR WAN IP
-```
-```
     CNAME | subdomain | @ (or example.com)
+```
+example:
+```
+    CNAME | cloud | @ (or example.com)
 ```
 ---
   
