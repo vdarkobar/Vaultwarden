@@ -41,7 +41,7 @@ services:
     restart: always
 
     networks:
-      - auth
+      - vw
 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
