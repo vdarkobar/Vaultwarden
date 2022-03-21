@@ -32,7 +32,7 @@ services:
       - SIGNUPS_ALLOWED=true # Change to false after first login
       - INVITATIONS_ALLOWED=true # Send invitation using admin page
       - LOG_FILE=/var/log/docker/bitwarden.log
-      - DOMAIN=https://vw.$DOMAINNAME
+      - DOMAIN=https://$SUBDOMAIN.$DOMAINNAME
 
   # Watchtower - automating Docker container base image updates.
   watchtower:
