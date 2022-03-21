@@ -11,7 +11,7 @@ Login to <a href="https://dash.cloudflare.com/">CloudFlare</a> and add: *Subdoma
 ```
 example:
 ```
-    CNAME | cloud | @ (or example.com)
+    CNAME | pass | @ (or example.com)
 ```
 ---
   
