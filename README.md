@@ -33,7 +33,7 @@ https://subdomain.example.com/admin
   
 ### Log:
 ```bash
-sudo docker-compose logs vaultwarden
+sudo docker compose logs vaultwarden
 sudo docker logs -tf --tail="50" vaultwarden
 ```
   
