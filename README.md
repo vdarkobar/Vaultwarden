@@ -13,7 +13,6 @@ example:
   
 > CNAME | pass | @ (or example.com)
   
----
   
 #### *Decide what you will use for*:
   
