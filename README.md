@@ -16,13 +16,13 @@ example:
 ---
   
 #### *Decide what you will use for*:
-```
-Domain name of your website, 
-Vaultwarden Subdomain and Port Number.
-```
+  
+> Domain name of your website, 
+> Vaultwarden Subdomain and Port Number.
+  
   
 ### *Run this command*:
-```
+```bash
 RED='\033[0;31m'; echo -ne "${RED}Enter directory name: "; read NAME; mkdir -p "$NAME"; \
 cd "$NAME" && git clone https://github.com/vdarkobar/Vaultwarden.git . && \
 chmod +x setup.sh && \
@@ -35,7 +35,7 @@ https://subdomain.example.com/admin
 ```
   
 ### Log:
-```
+```bash
 sudo docker-compose logs vaultwarden
 sudo docker logs -tf --tail="50" vaultwarden
 ```
