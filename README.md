@@ -5,14 +5,14 @@
   
 # Vaultwarden
     
-Login to <a href="https://dash.cloudflare.com/">CloudFlare</a> and add: *Subdomain* for *Vaultwarden*, pointing to your root *Domain*.
-```
-    CNAME | subdomain | @ (or example.com)
-```
+Login to <a href="https://dash.cloudflare.com/">CloudFlare</a> and add: *Subdomain* for *Vaultwarden*, pointing to your *root Domain*.
+  
+> CNAME | subdomain | @ (or example.com)
+  
 example:
-```
-    CNAME | pass | @ (or example.com)
-```
+  
+> CNAME | pass | @ (or example.com)
+  
 ---
   
 #### *Decide what you will use for*:
