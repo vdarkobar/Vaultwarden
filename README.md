@@ -16,9 +16,7 @@ example:
   
 #### *Decide what you will use for*:
   
-> Domain name of your website, 
-> Vaultwarden Subdomain and Port Number.
-  
+> Directory name, Domain name of your website, Vaultwarden Subdomain and Port Number.  
   
 ### *Run this command*:
 ```bash
