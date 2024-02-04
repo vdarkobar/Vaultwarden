@@ -20,7 +20,7 @@ example:
   
 ### *Run this command*:
 ```bash
-RED='\033[0;31m'; echo -ne "${RED}Enter directory name: "; read NAME; mkdir -p "$NAME"; \
+RED='\033[0;31m'; NC='\033[0m'; echo -ne "${RED}Enter directory name: ${NC}"; read NAME; mkdir -p "$NAME"; \
 cd "$NAME" && git clone https://github.com/vdarkobar/Vaultwarden.git . && \
 chmod +x setup.sh && \
 ./setup.sh
