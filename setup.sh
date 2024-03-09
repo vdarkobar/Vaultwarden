@@ -188,7 +188,8 @@ sed -i "s|04|${TZONE}|" .env && \
 rm README.md && \
 
 # Step 1: Generate a random input for Argon2 (simulating a password)
-RANDOM_INPUT=$(openssl rand -base64 48)
+#RANDOM_INPUT=$(openssl rand -base64 48)
+RANDOM_INPUT="01//VDarko//10"
 # Step 2: Automatically generate a unique salt using base64 encoding as recommended
 SALT=$(openssl rand -base64 32)
 # Step 3: Hash the random input with Argon2 using the generated salt and recommended parameters, then process the output with sed
