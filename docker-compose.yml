@@ -27,7 +27,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
 
     environment:
-      - ADMIN_TOKEN=${ADMIN_TOKEN}
+      - ADMIN_TOKEN=$ADMIN_TOKEN
       - WEBSOCKET_ENABLED=true
       - SIGNUPS_ALLOWED=true # Change to false after first login
       - INVITATIONS_ALLOWED=true # Send invitation using admin page
