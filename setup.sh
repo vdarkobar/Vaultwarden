@@ -25,7 +25,7 @@ echo
 echo 
 echo -e "${GREEN} Decide what you will use for:${NC}"
 echo
-echo "      - Domain name for your website, Vaultwarden Subdomain and Port Number"
+echo "      - Domain name for your website, Vaultwarden Subdomain, Port Number and Admin page password"
 echo
 echo
 
@@ -179,6 +179,7 @@ done
 
 read -s -p "Enter Vaultwarden Admin password: " VWPASS
 echo
+echo
 
 sed -i "s|01|${DNAME}|" .env && \
 sed -i "s|02|${SDNAME}|" .env && \
@@ -186,14 +187,11 @@ sed -i "s|03|${VWPORTN}|" .env && \
 sed -i "s|04|${TZONE}|" .env && \
 rm README.md && \
 
-# Step 1: Generate a random input for Argon2 (simulating a password)
-#RANDOM_INPUT=$VWPASS
-#RANDOM_INPUT=$(openssl rand -base64 48)
-# Step 2: Automatically generate a unique salt using base64 encoding as recommended
+# Automatically generate a unique salt using base64 encoding as recommended
 SALT=$(openssl rand -base64 32)
-# Step 3: Hash the random input with Argon2 using the generated salt and recommended parameters, then process the output with sed
+# Hash the password with Argon2 using the generated salt and recommended parameters, then process the output with sed
 TOKEN=$(echo -n "$VWPASS" | argon2 "$SALT" -e -id -k 65536 -t 3 -p 4 | sed 's#\$#\$\$#g')
-# Step 4: Use sed to replace the placeholder in the .env file with the encoded hash
+# Use sed to replace the placeholder in the .env file with the encoded hash
 sed -i "s|CHANGE_ADMIN_TOKEN|${TOKEN}|" .env
 
 # Main loop for docker compose up command
@@ -255,13 +253,9 @@ echo
 echo -e "${GREEN} Local access:${NC}    $LOCAL_IP:$VWPORTN"
 echo -e "${GREEN}             :${NC}    $LOCAL_DOMAIN:$VWPORTN"
 echo
-echo -e "${GREEN} To access Administrator page, go to:${NC}"
+echo -e "${GREEN} To access Administrator page add:${NC} /admin ${GREEN}to the end of the access url.${NC}"
 echo
-echo -e "                               $LOCAL_IP:$VWPORTN/admin"
-echo -e "                               $LOCAL_DOMAIN:$VWPORTN/admin"
-echo -e "                               $SDNAME.$DNAME/admin"
-echo
-echo -e "${GREEN} To authenticate, use generated admin token (.env) ${NC}"
+echo -e "${GREEN} To authenticate, use Vaultwarden Admin password.${NC}"
 echo 
 echo -e "${GREEN} Set Vaultwarden external url in the Vaultwarden browser extension:${NC}"
 echo
@@ -275,4 +269,3 @@ echo -e "${RED} This Script Will Self Destruct!${NC}"
 echo
 # VERY LAST LINE OF THE SCRIPT:
 sudo rm "$0"
-echo $VWPASS
