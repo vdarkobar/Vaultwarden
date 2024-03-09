@@ -238,14 +238,16 @@ LOCAL_DOMAIN="${HOSTNAME}${DOMAIN_LOCAL:+.$DOMAIN_LOCAL}"
 
 # Display access instructions
 echo
+echo -e "${GREEN} Vaultwarden requires https connection for account creation.${NC}"
+echo
+echo -e "${GREEN} Configure Reverse proxy (NPM) for external access.${NC}"
+echo
 echo -e "${GREEN} Local access:${NC} $LOCAL_IP:$VWPORTN"
 echo -e "${GREEN}             :${NC} $LOCAL_DOMAIN:$VWPORTN"
 echo
 echo -e "${GREEN} External access:${NC} $SDNAME.$DNAME"
 echo
-echo
 echo -e "${GREEN} Set Vaultwarden external url in the Vaultwarden browser extension:${NC}"
-echo -e "${GREEN} Configure Reverse proxy (NPM) for external access.${NC}"
 echo
 
 
