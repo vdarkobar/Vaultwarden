@@ -150,6 +150,33 @@ done
 
 echo
 
+# Prompt user for input
+echo -ne "${GREEN}Enter Time Zone (e.g. Europe/Berlin):${NC} "; read TZONE;
+echo
+# Check if the entered time zone is valid
+TZONES=$(timedatectl list-timezones) # Get list of time zones
+VALID_TZ=0 # Flag to check if TZONE is valid
+for tz in $TZONES; do
+    if [[ "$TZONE" == "$tz" ]]; then
+        VALID_TZ=1 # The entered time zone is valid
+        break
+    fi
+done
+
+# Prompt user until a valid time zone is entered
+while [[ $VALID_TZ -eq 0 ]]; do
+    echo -e "${RED}Invalid Time Zone. Please enter a valid time zone (e.g., Europe/Berlin).${NC}"
+    echo
+    echo -ne "${GREEN}Enter Time Zone:${NC} "; read TZONE;
+    echo
+    for tz in $TZONES; do
+        if [[ "$TZONE" == "$tz" ]]; then
+            VALID_TZ=1 # The entered time zone is valid
+            break
+        fi
+    done
+done
+
 #echo -ne "${RED}Enter Domain name: "; read DNAME; \
 #echo -ne "${RED}Enter Vaultwarden Subdomain: "; read SDNAME; \
 #echo -ne "${RED}Enter Vaultwarden Port Number (VWPORTN:80): "; read VWPORTN; \
@@ -157,6 +184,7 @@ echo
 sed -i "s|01|${DNAME}|" .env && \
 sed -i "s|02|${SDNAME}|" .env && \
 sed -i "s|03|${VWPORTN}|" .env && \
+sed -i "s|04|${TZONE}|" .env && \
 rm README.md && \
 TOKEN=$(openssl rand -base64 48); sed -i "s|CHANGE_ADMIN_TOKEN|${TOKEN}|" .env
 
@@ -217,7 +245,7 @@ echo -e "${GREEN} External access:${NC} $SDNAME.$DNAME"
 echo
 echo
 echo -e "${GREEN} Set Vaultwarden external url in the Vaultwarden browser extension:${NC}"
-echo -e "${RED} Configure Reverse proxy (NPM) for external access.${NC}"
+echo -e "${GREEN} Configure Reverse proxy (NPM) for external access.${NC}"
 echo
 
 
