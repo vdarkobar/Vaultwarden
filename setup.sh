@@ -177,9 +177,8 @@ while [[ $VALID_TZ -eq 0 ]]; do
     done
 done
 
-#echo -ne "${RED}Enter Domain name: "; read DNAME; \
-#echo -ne "${RED}Enter Vaultwarden Subdomain: "; read SDNAME; \
-#echo -ne "${RED}Enter Vaultwarden Port Number (VWPORTN:80): "; read VWPORTN; \
+read -s -p "Enter Vaultwarden Admin password: " VWPASS
+echo
 
 sed -i "s|01|${DNAME}|" .env && \
 sed -i "s|02|${SDNAME}|" .env && \
@@ -188,12 +187,12 @@ sed -i "s|04|${TZONE}|" .env && \
 rm README.md && \
 
 # Step 1: Generate a random input for Argon2 (simulating a password)
+#RANDOM_INPUT=$VWPASS
 #RANDOM_INPUT=$(openssl rand -base64 48)
-RANDOM_INPUT="01//VDarko//10"
 # Step 2: Automatically generate a unique salt using base64 encoding as recommended
 SALT=$(openssl rand -base64 32)
 # Step 3: Hash the random input with Argon2 using the generated salt and recommended parameters, then process the output with sed
-TOKEN=$(echo -n "$RANDOM_INPUT" | argon2 "$SALT" -e -id -k 65536 -t 3 -p 4 | sed 's#\$#\$\$#g')
+TOKEN=$(echo -n "$VWPASS" | argon2 "$SALT" -e -id -k 65536 -t 3 -p 4 | sed 's#\$#\$\$#g')
 # Step 4: Use sed to replace the placeholder in the .env file with the encoded hash
 sed -i "s|CHANGE_ADMIN_TOKEN|${TOKEN}|" .env
 
@@ -264,7 +263,6 @@ echo -e "                               $SDNAME.$DNAME/admin"
 echo
 echo -e "${GREEN} To authenticate, use generated admin token (.env) ${NC}"
 echo 
-echo
 echo -e "${GREEN} Set Vaultwarden external url in the Vaultwarden browser extension:${NC}"
 echo
 
@@ -277,3 +275,4 @@ echo -e "${RED} This Script Will Self Destruct!${NC}"
 echo
 # VERY LAST LINE OF THE SCRIPT:
 sudo rm "$0"
+echo $VWPASS
