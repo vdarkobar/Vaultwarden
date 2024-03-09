@@ -30,7 +30,7 @@ echo
 echo
 
 while true; do
-    echo -e "${GREEN} Continue? ${NC} (yes/no)"
+    echo -e "${GREEN} Continue?${NC} (yes/no)"
     echo
     read choice
     echo
@@ -138,7 +138,7 @@ echo
 echo -ne "${GREEN}Enter Domain name (e.g. example.com): ${NC}"; read DNAME
 echo
 
-echo -ne "${GREEN}Enter Vaultwarden Subdomain:${NC} "; read SDNAME
+echo -ne "${GREEN}Enter Vaultwarden Subdomain (e.g. pass or vw):${NC} "; read SDNAME
 echo
 
 echo -ne "${GREEN}Enter Vaultwarden Port Number(49152-65535):${NC} "; read VWPORTN;
@@ -186,7 +186,15 @@ sed -i "s|02|${SDNAME}|" .env && \
 sed -i "s|03|${VWPORTN}|" .env && \
 sed -i "s|04|${TZONE}|" .env && \
 rm README.md && \
-TOKEN=$(openssl rand -base64 48); sed -i "s|CHANGE_ADMIN_TOKEN|${TOKEN}|" .env
+
+# Step 1: Generate a random input for Argon2 (simulating a password)
+RANDOM_INPUT=$(openssl rand -base64 48)
+# Step 2: Automatically generate a unique salt using base64 encoding as recommended
+SALT=$(openssl rand -base64 32)
+# Step 3: Hash the random input with Argon2 using the generated salt and recommended parameters
+TOKEN=$(echo -n "$RANDOM_INPUT" | argon2 "$SALT" -e -id -k 65536 -t 3 -p 4)
+# Step 4: Use sed to replace the placeholder in the .env file with the encoded hash
+sed -i "s|CHANGE_ADMIN_TOKEN|${TOKEN}|" .env
 
 # Main loop for docker compose up command
 while true; do
@@ -238,14 +246,23 @@ LOCAL_DOMAIN="${HOSTNAME}${DOMAIN_LOCAL:+.$DOMAIN_LOCAL}"
 
 # Display access instructions
 echo
-echo -e "${GREEN} Vaultwarden requires https connection for account creation.${NC}"
+echo -e "${GREEN} Vaultwarden requires${NC} https ${GREEN}connection for account creation.${NC}"
 echo
 echo -e "${GREEN} Configure Reverse proxy (NPM) for external access.${NC}"
 echo
-echo -e "${GREEN} Local access:${NC} $LOCAL_IP:$VWPORTN"
-echo -e "${GREEN}             :${NC} $LOCAL_DOMAIN:$VWPORTN"
-echo
 echo -e "${GREEN} External access:${NC} $SDNAME.$DNAME"
+echo
+echo -e "${GREEN} Local access:${NC}    $LOCAL_IP:$VWPORTN"
+echo -e "${GREEN}             :${NC}    $LOCAL_DOMAIN:$VWPORTN"
+echo
+echo -e "${GREEN} To access Administrator page, go to:${NC}"
+echo
+echo -e "                               $LOCAL_IP:$VWPORTN/admin"
+echo -e "                               $LOCAL_DOMAIN:$VWPORTN/admin"
+echo -e "                               $SDNAME.$DNAME/admin"
+echo
+echo -e "${GREEN} To authenticate, use generated admin token (.env) ${NC}"
+echo 
 echo
 echo -e "${GREEN} Set Vaultwarden external url in the Vaultwarden browser extension:${NC}"
 echo
