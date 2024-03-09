@@ -25,7 +25,7 @@ echo
 echo 
 echo -e "${GREEN} Decide what you will use for:${NC}"
 echo
-echo "      - Domain name of your website, Vaultwarden Subdomain and Port Number"
+echo "      - Domain name for your website, Vaultwarden Subdomain and Port Number"
 echo
 echo
 
@@ -191,8 +191,8 @@ rm README.md && \
 RANDOM_INPUT=$(openssl rand -base64 48)
 # Step 2: Automatically generate a unique salt using base64 encoding as recommended
 SALT=$(openssl rand -base64 32)
-# Step 3: Hash the random input with Argon2 using the generated salt and recommended parameters
-TOKEN=$(echo -n "$RANDOM_INPUT" | argon2 "$SALT" -e -id -k 65536 -t 3 -p 4)
+# Step 3: Hash the random input with Argon2 using the generated salt and recommended parameters, then process the output with sed
+TOKEN=$(echo -n "$RANDOM_INPUT" | argon2 "$SALT" -e -id -k 65536 -t 3 -p 4 | sed 's#\$#\$\$#g')
 # Step 4: Use sed to replace the placeholder in the .env file with the encoded hash
 sed -i "s|CHANGE_ADMIN_TOKEN|${TOKEN}|" .env
 
